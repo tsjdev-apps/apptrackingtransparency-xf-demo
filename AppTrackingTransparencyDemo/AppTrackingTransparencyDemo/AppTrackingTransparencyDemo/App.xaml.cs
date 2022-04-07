@@ -21,7 +21,7 @@ namespace AppTrackingTransparencyDemo
                 var status = await appTrackingTransparencyService.CheckStatusAsync();
 
                 if (status != PermissionStatus.Granted)
-                    appTrackingTransparencyService.Request(s => HandleTracking(s));
+                    await appTrackingTransparencyService.RequestAsync(s => HandleTracking(s));
                 else
                     HandleTracking(status);
             }
