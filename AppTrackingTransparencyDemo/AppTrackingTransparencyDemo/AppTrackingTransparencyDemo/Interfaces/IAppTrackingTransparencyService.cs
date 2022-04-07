@@ -8,6 +8,6 @@ namespace AppTrackingTransparencyDemo.Interfaces
     {
         Task<PermissionStatus> CheckStatusAsync();
 
-        void Request(Action<PermissionStatus> completionAction);
+        Task RequestAsync(Action<PermissionStatus> completionAction);
     }
 }

@@ -14,8 +14,12 @@ namespace AppTrackingTransparencyDemo.iOS.Services
         protected override Func<IEnumerable<string>> RequiredInfoPlistKeys
             => () => new string[] { "NSUserTrackingUsageDescription" };
 
-        public void Request(Action<PermissionStatus> completionAction)
+        public async Task RequestAsync(Action<PermissionStatus> completionAction)
         {
+            // Due to some changes on iOS 15 we need to wait a little bit before using
+            // ATTrackingManager to show the corresponding popup
+            await Task.Delay(1000);
+
             ATTrackingManager.RequestTrackingAuthorization(
                 (result) => completionAction(ConvertStatus(result)));
         }
